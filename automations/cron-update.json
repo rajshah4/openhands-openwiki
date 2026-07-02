@@ -1,0 +1,23 @@
+{
+  "name": "OpenWiki Docs Daily Update",
+  "plugins": [
+    {
+      "source": "github:rajshah4/openwiki-openhands-prototype",
+      "repo_path": "plugins/openwiki-docs",
+      "ref": "main"
+    }
+  ],
+  "repos": [
+    {
+      "url": "https://github.com/ORG/REPO",
+      "ref": "main"
+    }
+  ],
+  "prompt": "Run /openwiki-docs:update. If OpenWiki documentation changed, create a branch named openwiki/update, commit only openwiki/** plus top-level AGENTS.md or CLAUDE.md changes, and open a pull request titled \"docs: update OpenWiki\" with a concise summary and review notes. If no docs changes are needed, do not create a commit or PR.",
+  "trigger": {
+    "type": "cron",
+    "schedule": "0 8 * * *",
+    "timezone": "UTC"
+  },
+  "timeout": 1200
+}

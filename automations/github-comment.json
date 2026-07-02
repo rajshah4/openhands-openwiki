@@ -1,0 +1,18 @@
+{
+  "name": "OpenWiki Docs Mention",
+  "plugins": [
+    {
+      "source": "github:rajshah4/openwiki-openhands-prototype",
+      "repo_path": "plugins/openwiki-docs",
+      "ref": "main"
+    }
+  ],
+  "prompt": "A GitHub issue or pull request comment mentioned OpenWiki. Read the event payload and surrounding issue or PR context. If the comment asks to initialize docs, run /openwiki-docs:init. Otherwise run /openwiki-docs:update with any requested focus from the comment. Commit only openwiki/** plus top-level AGENTS.md or CLAUDE.md changes. Open a PR for issue-triggered work, or push to the PR branch when safe and permitted. Leave a concise comment with what changed or why no change was needed.",
+  "trigger": {
+    "type": "event",
+    "source": "github",
+    "on": "issue_comment.created",
+    "filter": "icontains(comment.body, '@openhands openwiki') || icontains(comment.body, '/openwiki')"
+  },
+  "timeout": 1200
+}

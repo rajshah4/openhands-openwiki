@@ -1,0 +1,18 @@
+{
+  "name": "OpenWiki Docs PR Label Update",
+  "plugins": [
+    {
+      "source": "github:rajshah4/openwiki-openhands-prototype",
+      "repo_path": "plugins/openwiki-docs",
+      "ref": "main"
+    }
+  ],
+  "prompt": "A pull request was labeled for OpenWiki documentation maintenance. Inspect the PR repository and branch from the GitHub event payload. Run /openwiki-docs:update focused on the PR changes. If documentation changed, commit only openwiki/** plus top-level AGENTS.md or CLAUDE.md changes back to the PR branch and leave a concise PR comment summarizing the docs update. If no docs changes are needed, leave a short comment saying the OpenWiki docs are current.",
+  "trigger": {
+    "type": "event",
+    "source": "github",
+    "on": "pull_request.labeled",
+    "filter": "contains(pull_request.labels[].name, 'openwiki-update')"
+  },
+  "timeout": 1200
+}

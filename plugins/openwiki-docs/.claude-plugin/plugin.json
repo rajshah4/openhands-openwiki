@@ -1,0 +1,43 @@
+{
+  "name": "openwiki-docs",
+  "version": "0.1.0",
+  "description": "Generate and maintain OpenWiki-style repository documentation with OpenHands",
+  "author": {
+    "name": "Rajiv Shah"
+  },
+  "homepage": "https://github.com/rajshah4/openwiki-openhands-prototype",
+  "repository": "https://github.com/rajshah4/openwiki-openhands-prototype",
+  "license": "MIT",
+  "keywords": [
+    "documentation",
+    "repo",
+    "wiki",
+    "automation",
+    "openhands"
+  ],
+  "parameters": {
+    "focus": {
+      "type": "string",
+      "description": "Optional area of the repository to prioritize while generating or updating docs",
+      "required": false,
+      "default": "repository architecture, workflows, and future agent guidance"
+    }
+  },
+  "entry_command": "update",
+  "examples": [
+    {
+      "title": "Initialize documentation",
+      "prompt": "/openwiki-docs:init",
+      "parameters": {
+        "focus": "architecture and workflows"
+      }
+    },
+    {
+      "title": "Update existing documentation",
+      "prompt": "/openwiki-docs:update API and routing changes",
+      "parameters": {
+        "focus": "API and routing changes"
+      }
+    }
+  ]
+}
