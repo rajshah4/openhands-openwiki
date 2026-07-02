@@ -68,6 +68,7 @@ Required behavior:
 - Include a high-level repository overview in `quickstart.md`.
 - Link from `quickstart.md` to every major supporting page.
 - Include source references inline where they help a reader verify or continue exploring.
+- When a Markdown file under `openwiki/` links to repository-root files or directories, use paths relative to the page location, such as `../src/server.js` or `../README.md`.
 - Add change-oriented guidance for future agents.
 - Avoid thin pages and one-file section directories unless the boundary is clearly useful and likely to grow.
 - Before finishing, review the `openwiki/` tree and merge/remove stubs.
@@ -103,7 +104,7 @@ Only inspect and edit top-level files for this step. Do not edit nested `AGENTS.
 
 If both top-level files exist, ensure both contain the same section. If neither exists, create top-level `AGENTS.md` containing only this section.
 
-Use this exact section structure:
+Use this section structure. Keep the "includes" sentence accurate for the pages that actually exist; do not claim architecture, workflow, domain, integration, test, or source-map pages exist unless you created or verified them.
 
 ```markdown
 ## OpenWiki
@@ -112,9 +113,9 @@ This repository has documentation located in the /openwiki directory. Start here
 
 - [OpenWiki quickstart](openwiki/quickstart.md)
 
-OpenWiki includes repository overview, architecture notes, workflows, domain concepts, operations, integrations, testing guidance, and source maps.
+OpenWiki includes <accurate, comma-separated list of existing documentation areas>.
 
-When working in this repository, read the OpenWiki quickstart first, then follow its links to the relevant architecture, workflow, domain, operation, and testing notes.
+When working in this repository, read the OpenWiki quickstart first, then follow its links to the relevant supporting notes.
 ```
 
 Preserve surrounding instructions. Replace an existing stale OpenWiki section instead of adding duplicates.

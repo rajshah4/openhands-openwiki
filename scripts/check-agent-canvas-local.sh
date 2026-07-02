@@ -2,7 +2,10 @@
 set -euo pipefail
 
 BASE="${1:-http://127.0.0.1:8000}"
-KEY_FILE="${HOME}/.openhands/agent-canvas/session-api-key.txt"
+KEY_FILES=(
+  "${HOME}/.openhands/agent-canvas/api-key.txt"
+  "${HOME}/.openhands/agent-canvas/session-api-key.txt"
+)
 
 fetch() {
   local url="$1"
@@ -50,19 +53,26 @@ do
   fi
 done
 
-if [[ -f "${KEY_FILE}" ]]; then
-  session_key="$(cat "${KEY_FILE}")"
-  if /bin/zsh -lc 'curl -fsS --retry 3 --retry-delay 1 "$1" -H "X-Session-API-Key: $2"' \
-    _ "${BASE}/api/plugins/installed" "${session_key}" >/dev/null &&
-    /bin/zsh -lc 'curl -fsS --retry 3 --retry-delay 1 "$1" -H "X-Session-API-Key: $2"' \
-      _ "${BASE}/api/skills/installed" "${session_key}" >/dev/null; then
-    echo "authenticated plugin/skill probes: ok"
-  else
-    echo "authenticated plugin/skill probes: skipped or unauthorized"
-    echo "server_info and openapi preflight still passed"
+authenticated=false
+for key_file in "${KEY_FILES[@]}"; do
+  if [[ ! -f "${key_file}" ]]; then
+    continue
   fi
-else
-  echo "session key not found at ${KEY_FILE}; skipped authenticated probes"
+
+  session_key="$(cat "${key_file}")"
+  if /bin/zsh -lc 'curl -fsS --retry 3 --retry-delay 1 "$1" -H "X-Session-API-Key: $2"' \
+    _ "${BASE}/api/profiles" "${session_key}" >/dev/null &&
+    /bin/zsh -lc 'curl -fsS --retry 3 --retry-delay 1 "$1" -H "X-Session-API-Key: $2"' \
+      _ "${BASE}/api/settings" "${session_key}" >/dev/null; then
+    echo "authenticated settings/profile probes: ok ($(basename "${key_file}"))"
+    authenticated=true
+    break
+  fi
+done
+
+if [[ "${authenticated}" != true ]]; then
+  echo "authenticated settings/profile probes: skipped or unauthorized"
+  echo "server_info and openapi preflight still passed"
 fi
 
 echo "local Agent Canvas preflight passed"

@@ -20,6 +20,16 @@ sdk_version: 1.29.3
 
 Use `127.0.0.1` for scripted checks. On this machine, `localhost` may resolve through an interface that does not answer even when the service is listening.
 
+For API-driven local runs on this machine, `~/.openhands/agent-canvas/api-key.txt` is the active local API key. `session-api-key.txt` may be stale.
+
+The local `Minimax` profile maps to:
+
+```text
+openhands/minimax-m2.7
+```
+
+The local Agent Server may not have macOS permission to read repositories under `~/Documents`. If tool calls fail with `Operation not permitted`, copy the test repo to `/private/tmp` and run against that path.
+
 The advertised API includes:
 
 - `/api/conversations`
@@ -101,6 +111,17 @@ Then install or load the local plugin through Agent Canvas. Use this repository 
 plugins/openwiki-docs
 ```
 
+For direct API testing with the local `Minimax` profile, use:
+
+```bash
+OPENWIKI_WORKSPACE=/private/tmp/my-openwiki-test-repo \
+OPENWIKI_PROFILE=Minimax \
+OPENWIKI_MODE=init \
+node scripts/run-agent-canvas-openwiki.mjs
+```
+
+This script reads the encrypted local profile through Agent Canvas, injects the `openwiki-docs` skill into `agent_context.skills`, and creates a conversation with the standard local tool set. It does not print API keys.
+
 ### LC-1: Demo Init
 
 Workspace:
@@ -178,10 +199,12 @@ Expected:
 Run preflight after setting credentials:
 
 ```bash
-export OPENHANDS_HOST="https://..."
-export OPENHANDS_API_KEY="sk-oh-..."
+export OPENHANDS_HOST="https://app.replicated.rajistics.com"
+export DOTENV_FILE="/Users/rajiv.shah/Code/install_replicate/.env"
 ./scripts/check-replicated-automation-api.sh
 ```
+
+Do not `source` the Rajistics `.env` directly. The helper parses assignment lines and supports either `OPENHANDS_API_KEY` or `OPENHANDS_API_KEY_ORG`.
 
 ### RA-1: Manual Cron Smoke On A Fork
 
