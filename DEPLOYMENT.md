@@ -33,6 +33,14 @@ Use a low-risk repository with:
 
 Start with daily cron. Once the docs quality looks good, add the PR label trigger.
 
+For testing, prefer forks of representative OpenHands repos first:
+
+- `OpenHands/extensions`
+- `OpenHands/software-agent-sdk`
+- `OpenHands/agent-canvas`
+
+Save `OpenHands/OpenHands` for later scale testing after the smaller forks pass.
+
 ## Expected PR Scope
 
 Automation runs should commit only:
@@ -44,3 +52,19 @@ CLAUDE.md
 ```
 
 Anything else should be treated as a bug in the plugin instructions or the automation prompt.
+
+## Preflight Scripts
+
+Local Agent Canvas:
+
+```bash
+./scripts/check-agent-canvas-local.sh http://127.0.0.1:8000
+```
+
+Replicated automation API:
+
+```bash
+export OPENHANDS_HOST="https://..."
+export OPENHANDS_API_KEY="sk-oh-..."
+./scripts/check-replicated-automation-api.sh
+```

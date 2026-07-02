@@ -19,6 +19,7 @@ In OpenHands, model configuration, sandbox tools, repo cloning, GitHub integrati
 │   └── marketplace.json
 ├── automations/
 │   ├── cron-update.json
+│   ├── fork-smoke-template.json
 │   ├── github-comment.json
 │   └── github-label-update.json
 ├── demo-target/
@@ -36,6 +37,8 @@ In OpenHands, model configuration, sandbox tools, repo cloning, GitHub integrati
 │           └── openwiki-docs/
 │               └── SKILL.md
 └── scripts/
+    ├── check-agent-canvas-local.sh
+    ├── check-replicated-automation-api.sh
     └── validate.sh
 ```
 
@@ -56,6 +59,7 @@ The command files are intentionally thin. The long-lived behavior lives in `plug
 Use the plugin preset for work that should run as an agent:
 
 - `automations/cron-update.json`: daily documentation maintenance.
+- `automations/fork-smoke-template.json`: first manual smoke against a fork.
 - `automations/github-label-update.json`: run when a PR gets the `openwiki-update` label.
 - `automations/github-comment.json`: run when someone comments with `@openhands openwiki`.
 
@@ -67,6 +71,29 @@ Before deploying, replace placeholders:
 - plugin source/ref
 
 The examples are intentionally payload-shaped JSON files so they can be pasted into the OpenHands automation API request body.
+
+## Dual-Backend Testing
+
+This prototype is intended to run from both:
+
+- local Agent Canvas / Agent Server at `http://localhost:8000`
+- a replicated OpenHands automation service
+
+Start here:
+
+```bash
+./scripts/check-agent-canvas-local.sh http://127.0.0.1:8000
+```
+
+For the replicated instance:
+
+```bash
+export OPENHANDS_HOST="https://..."
+export OPENHANDS_API_KEY="sk-oh-..."
+./scripts/check-replicated-automation-api.sh
+```
+
+The full plan is in `TESTING_PLAN.md`. The recommended first real trials are forks of `OpenHands/extensions`, `OpenHands/software-agent-sdk`, and `OpenHands/agent-canvas`.
 
 ## Suggested First Test
 
