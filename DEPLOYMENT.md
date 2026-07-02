@@ -22,6 +22,40 @@ curl -X POST "${OPENHANDS_HOST}/api/automation/v1/preset/plugin" \
 
 For a local or private deployment that cannot receive inbound GitHub webhooks, use `cron-update.json` first. Event triggers require public webhook delivery.
 
+## Rajistics Smoke Deployment
+
+Published repos:
+
+- Plugin/prototype: `https://github.com/rajshah4/openwiki-openhands-prototype`
+- Smoke target: `https://github.com/rajshah4/openwiki-demo-target`
+
+Created replicated automation on July 2, 2026:
+
+```text
+host: https://app.replicated.rajistics.com
+payload: automations/rajistics-demo-target-smoke.json
+automation_id: 9c875420-0b02-4dad-abe7-4dd0da725986
+name: OpenWiki Demo Target Smoke
+trigger: 0 8 * * * America/Chicago
+```
+
+Manual dispatch result:
+
+```text
+run_id: 5831e582-14a9-41db-8702-7ab4af2baf47
+status: COMPLETED
+conversation_id: 545ac5d2-c5d3-4660-8fde-81afc9031fec
+pull_request: https://github.com/rajshah4/openwiki-demo-target/pull/1
+```
+
+The PR changed only:
+
+```text
+AGENTS.md
+openwiki/.last-update.json
+openwiki/quickstart.md
+```
+
 ## First Production Candidate
 
 Use a low-risk repository with:

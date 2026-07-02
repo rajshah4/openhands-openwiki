@@ -66,20 +66,25 @@ Start tiny, then move through forked real repos.
    - Local-only fixture.
    - Use for very fast init/update/no-op checks.
 
-2. Fork of `OpenHands/extensions`
+2. `rajshah4/openwiki-demo-target`
+   - Published tiny smoke target.
+   - Replicated Rajistics automation opened the first docs PR successfully.
+   - PR: `https://github.com/rajshah4/openwiki-demo-target/pull/1`
+
+3. Fork of `OpenHands/extensions`
    - Good first fork candidate.
    - Small, plugin/skill-shaped, directly relevant to this project.
 
-3. Fork of `OpenHands/software-agent-sdk`
+4. Fork of `OpenHands/software-agent-sdk`
    - Medium complexity.
    - Python SDK plus examples and existing agent instructions.
    - Good test for source-map quality and update discipline.
 
-4. Fork of `OpenHands/agent-canvas`
+5. Fork of `OpenHands/agent-canvas`
    - Tests frontend/backend product docs.
    - Good fit because users will run this from local Agent Canvas.
 
-5. Fork of `OpenHands/OpenHands`
+6. Fork of `OpenHands/OpenHands`
    - Large monorepo.
    - Use last, mostly to test scale limits, page budgeting, and whether updates stay surgical.
 
@@ -238,6 +243,16 @@ Expected:
 - Conversation remains viewable in the UI.
 - Branch/PR is created only when docs changed.
 - PR diff scope is limited to allowed docs files.
+
+Known-good Rajistics smoke:
+
+```text
+automation_id: 9c875420-0b02-4dad-abe7-4dd0da725986
+run_id: 5831e582-14a9-41db-8702-7ab4af2baf47
+conversation_id: 545ac5d2-c5d3-4660-8fde-81afc9031fec
+target_repo: https://github.com/rajshah4/openwiki-demo-target
+pull_request: https://github.com/rajshah4/openwiki-demo-target/pull/1
+```
 
 ### RA-2: No-op Update On Same Fork
 

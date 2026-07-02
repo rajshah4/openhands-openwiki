@@ -21,7 +21,8 @@ In OpenHands, model configuration, sandbox tools, repo cloning, GitHub integrati
 │   ├── cron-update.json
 │   ├── fork-smoke-template.json
 │   ├── github-comment.json
-│   └── github-label-update.json
+│   ├── github-label-update.json
+│   └── rajistics-demo-target-smoke.json
 ├── demo-target/
 │   ├── README.md
 │   └── src/
@@ -39,6 +40,7 @@ In OpenHands, model configuration, sandbox tools, repo cloning, GitHub integrati
 └── scripts/
     ├── check-agent-canvas-local.sh
     ├── check-replicated-automation-api.sh
+    ├── run-agent-canvas-openwiki.mjs
     └── validate.sh
 ```
 
@@ -62,6 +64,7 @@ Use the plugin preset for work that should run as an agent:
 - `automations/fork-smoke-template.json`: first manual smoke against a fork.
 - `automations/github-label-update.json`: run when a PR gets the `openwiki-update` label.
 - `automations/github-comment.json`: run when someone comments with `@openhands openwiki`.
+- `automations/rajistics-demo-target-smoke.json`: deployed smoke automation for `rajshah4/openwiki-demo-target`.
 
 Before deploying, replace placeholders:
 
@@ -132,4 +135,4 @@ This prototype treats OpenWiki as an agent skill and OpenHands automations as th
 - human-reviewable docs PRs
 - no custom credential setup inside the plugin
 
-The next step after this prototype is to copy `plugins/openwiki-docs/` into an OpenHands plugin marketplace repo and deploy one automation against a real low-risk repository.
+The prototype is published at `rajshah4/openwiki-openhands-prototype`. A first replicated smoke automation is deployed against `rajshah4/openwiki-demo-target`.
