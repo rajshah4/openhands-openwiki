@@ -41,7 +41,14 @@ The advertised API includes:
 - `/api/workspaces`
 - `/api/settings`
 
-This means the local track should test plugin/skill installation and direct conversation execution. It should not depend on public webhook delivery.
+The local automation API is also reachable through the same ingress:
+
+```text
+GET http://127.0.0.1:8000/api/automation/v1?limit=1 -> 200
+response keys: automations, total
+```
+
+This means the local track should test direct conversation execution and local automation lifecycle. It should not depend on public webhook delivery.
 
 ## Backend Matrix
 

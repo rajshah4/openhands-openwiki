@@ -54,6 +54,7 @@ do
 done
 
 authenticated=false
+authenticated_key=""
 for key_file in "${KEY_FILES[@]}"; do
   if [[ ! -f "${key_file}" ]]; then
     continue
@@ -66,11 +67,19 @@ for key_file in "${KEY_FILES[@]}"; do
       _ "${BASE}/api/settings" "${session_key}" >/dev/null; then
     echo "authenticated settings/profile probes: ok ($(basename "${key_file}"))"
     authenticated=true
+    authenticated_key="${session_key}"
     break
   fi
 done
 
-if [[ "${authenticated}" != true ]]; then
+if [[ "${authenticated}" == true ]]; then
+  if /bin/zsh -lc 'curl -fsS --retry 3 --retry-delay 1 "$1" -H "X-Session-API-Key: $2"' \
+    _ "${BASE}/api/automation/v1?limit=1" "${authenticated_key}" >/dev/null; then
+    echo "local automation API probe: ok"
+  else
+    echo "local automation API probe: skipped or unavailable"
+  fi
+else
   echo "authenticated settings/profile probes: skipped or unauthorized"
   echo "server_info and openapi preflight still passed"
 fi
