@@ -4,6 +4,6 @@ dist/
 build/
 coverage/
 *.log
-openwiki/
+/openwiki/
 .env
 .env.*

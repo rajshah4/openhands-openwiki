@@ -133,7 +133,8 @@ Constraints:
 - Read repository files and git history before writing docs.
 - Write documentation under openwiki/ and update top-level agent guidance files only if the skill calls for it.
 - Do not edit application source files.
-- Run a quick verification with generated file listing and git status/diff.
+- Use the runtime clock for openwiki/.last-update.json updatedAt.
+- Run a quick verification with generated file listing, relative link sanity, and git status/diff.
 - Finish with a short summary of generated files and verification.`;
 
 const payload = {

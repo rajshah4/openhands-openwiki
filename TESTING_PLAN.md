@@ -222,7 +222,7 @@ Do not `source` the Rajistics `.env` directly. The helper parses assignment line
 
 Use `automations/cron-update.json` with:
 
-- plugin source set to the pushed prototype or marketplace repo
+- plugin source set to the pushed `openhands-openwiki` repo or marketplace repo
 - repo set to a fork, not upstream
 - schedule set to daily
 

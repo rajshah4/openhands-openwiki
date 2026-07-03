@@ -2,7 +2,7 @@
   "name": "OpenWiki Docs PR Label Update",
   "plugins": [
     {
-      "source": "github:rajshah4/openwiki-openhands-prototype",
+      "source": "github:rajshah4/openhands-openwiki",
       "repo_path": "plugins/openwiki-docs",
       "ref": "main"
     }

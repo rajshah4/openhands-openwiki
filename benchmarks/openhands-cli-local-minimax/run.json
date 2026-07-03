@@ -1,0 +1,8 @@
+{
+  "conversation_id": "ece45900-c862-4a44-b85e-c48ecb1a021c",
+  "conversation_url": "http://127.0.0.1:8000/conversations/ece45900-c862-4a44-b85e-c48ecb1a021c",
+  "workspace": "/private/tmp/openwiki-benchmark-openhands-cli.WdOTlW/repo",
+  "profile": "Minimax",
+  "model": "openhands/minimax-m2.7",
+  "created_at": "2026-07-03T00:41:25.188Z"
+}

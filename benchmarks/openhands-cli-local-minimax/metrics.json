@@ -1,0 +1,50 @@
+{
+  "benchmark": "openhands-cli-local-minimax",
+  "target": {
+    "repo": "OpenHands/OpenHands-CLI",
+    "url": "https://github.com/OpenHands/OpenHands-CLI",
+    "commit": "2df8a2835d3f1bd2f2eadf5a7a2e1ad0dfb0d271",
+    "file_count_before_run": 388,
+    "clone_size_before_run": "10M",
+    "file_count_after_generation": 394,
+    "clone_size_after_generation": "11M"
+  },
+  "run": {
+    "conversation_id": "ece45900-c862-4a44-b85e-c48ecb1a021c",
+    "conversation_url": "http://127.0.0.1:8000/conversations/ece45900-c862-4a44-b85e-c48ecb1a021c",
+    "workspace": "/private/tmp/openwiki-benchmark-openhands-cli.WdOTlW/repo",
+    "profile": "Minimax",
+    "model": "openhands/minimax-m2.7",
+    "created_at": "2026-07-03T00:41:25.188Z",
+    "status": "finished",
+    "updated_at": "2026-07-03T00:44:48.248165Z",
+    "iterations": 28,
+    "duration_seconds": 203
+  },
+  "usage": {
+    "model": "openhands/minimax-m2.7",
+    "prompt_tokens": 1536752,
+    "completion_tokens": 11980,
+    "cache_read_tokens": 1452281,
+    "cache_write_tokens": 0,
+    "reasoning_tokens": 1005,
+    "context_window": 131072,
+    "per_turn_token": 69297
+  },
+  "outputs": {
+    "openwiki_files": [
+      "openwiki/.last-update.json",
+      "openwiki/architecture.md",
+      "openwiki/build-release.md",
+      "openwiki/commands.md",
+      "openwiki/quickstart.md",
+      "openwiki/setup.md",
+      "openwiki/testing.md"
+    ],
+    "git_status": [
+      "M AGENTS.md",
+      "?? openwiki/"
+    ],
+    "final_response": "## OpenWiki Init Complete\n\n### Generated Files (6 pages + metadata)\n\n| File | Lines | Purpose |\n|------|-------|---------|\n| `openwiki/quickstart.md` | 123 | Entry point with repo overview, structure, quick start, key commands, change guidance |\n| `openwiki/architecture.md` | 105 | TUI state management, widget hierarchy, controllers, data flow, CLI dispatch, persistence stores |\n| `openwiki/commands.md` | 192 | CLI modes (TUI, headless, web, serve, ACP, cloud), argument parsing, confirmation modes |\n| `openwiki/setup.md` | 142 | uv workflow, Makefile targets, pre-commit, persistence directory, code style |\n| `openwiki/testing.md` | 157 | Unit/integration, snapshot (pytest-textual-snapshot), binary (tui_e2e), CI workflow |\n| `openwiki/build-release.md` | 101 | PyInstaller binary build, GitHub Actions CI matrix, release procedure |\n| `openwiki/.last-update.json` | — | Metadata: timestamp, command=init, gitHead |\n\n### Top-level AGENTS.md Update\n\nAdded OpenWiki reference section at end of existing AGENTS.md.\n\n### Verification\n\n- ✅ File listing complete\n- ✅ All relative links point to existing files (intra-openwiki `.md` links + `../RELEASE_PROCEDURE.md`)\n- ✅ AGENTS.md diff shows added OpenWiki section\n- ✅ Metadata uses runtime timestamp (`2026-07-03T00:42:12.000Z`) and git HEAD (`2df8a28`)\n\n### Evidence Inspected\n\n- `README.md`, `pyproject.toml`, `AGENTS.md`, `Makefile`, `RELEASE_PROCEDURE.md`\n- `openhands_cli/entrypoint.py`, `openhands_cli/tui/textual_app.py`, `openhands_cli/tui/core/state.py`, `openhands_cli/tui/core/conversation_manager.py`\n- `openhands_cli/gui_launcher.py`, `openhands_cli/argparsers/main_parser.py`, `openhands_cli/locations.py`, `openhands_cli/stores/__init__.py`\n- `.github/workflows/cli-build-binary-and-optionally-release.yml`, `build.py`\n- `git --no-pager log -20` (recent commits)\n\n### Git Status\n\n```\nmodified:   AGENTS.md\nuntracked:  openwiki/\n```\n\n### Suggested Commit\n\n```bash\ngit add openwiki/ AGENTS.md\ngit commit -m \"docs: initialize OpenWiki\"\n```\n\n**PR-ready summary**: 6 documentation pages + metadata covering architecture, commands, setup, testing, and build/release. All claims grounded in source files."
+  }
+}

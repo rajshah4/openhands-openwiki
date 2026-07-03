@@ -26,7 +26,7 @@ For a local or private deployment that cannot receive inbound GitHub webhooks, u
 
 Published repos:
 
-- Plugin/prototype: `https://github.com/rajshah4/openwiki-openhands-prototype`
+- Plugin/repo: `https://github.com/rajshah4/openhands-openwiki`
 - Smoke target: `https://github.com/rajshah4/openwiki-demo-target`
 
 Created replicated automation on July 2, 2026:

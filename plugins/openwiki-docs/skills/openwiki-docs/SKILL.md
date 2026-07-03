@@ -67,6 +67,7 @@ Required behavior:
 - Use at most 8 documentation pages unless the repo clearly needs more.
 - Include a high-level repository overview in `quickstart.md`.
 - Link from `quickstart.md` to every major supporting page.
+- Do not link from `quickstart.md` to a supporting page unless that page exists by the end of the same run.
 - Include source references inline where they help a reader verify or continue exploring.
 - When a Markdown file under `openwiki/` links to repository-root files or directories, use paths relative to the page location, such as `../src/server.js` or `../README.md`.
 - Add change-oriented guidance for future agents.
@@ -138,6 +139,8 @@ Use this shape:
 Set `command` to `init` or `update`.
 
 Set `gitHead` from `git rev-parse HEAD` when available.
+
+Set `updatedAt` from the runtime clock, not from your prompt context. Prefer a command such as `date -u +"%Y-%m-%dT%H:%M:%S.000Z"` before writing metadata.
 
 In update mode, update metadata only when OpenWiki content changed. In init mode, write metadata after creating useful docs.
 
