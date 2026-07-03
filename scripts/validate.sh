@@ -14,6 +14,7 @@ required_files=(
   "automations/github-label-update.json"
   "automations/github-comment.json"
   "automations/rajistics-demo-target-smoke.json"
+  "automations/rajistics-postrename-smoke.json"
   "docs/local-agent-canvas.md"
   "docs/openhands-enterprise-automations.md"
   "benchmarks/openhands-cli-local-minimax/README.md"
@@ -39,6 +40,7 @@ python3 -m json.tool "${ROOT}/automations/fork-smoke-template.json" >/dev/null
 python3 -m json.tool "${ROOT}/automations/github-label-update.json" >/dev/null
 python3 -m json.tool "${ROOT}/automations/github-comment.json" >/dev/null
 python3 -m json.tool "${ROOT}/automations/rajistics-demo-target-smoke.json" >/dev/null
+python3 -m json.tool "${ROOT}/automations/rajistics-postrename-smoke.json" >/dev/null
 python3 -m json.tool "${ROOT}/benchmarks/openhands-cli-local-minimax/metrics.json" >/dev/null
 
 grep -q "## OpenWiki" "${ROOT}/plugins/openwiki-docs/skills/openwiki-docs/SKILL.md"

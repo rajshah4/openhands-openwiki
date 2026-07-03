@@ -56,6 +56,35 @@ openwiki/.last-update.json
 openwiki/quickstart.md
 ```
 
+## Rajistics Post-Rename Smoke
+
+After renaming the repo to `rajshah4/openhands-openwiki`, a second smoke automation verified that the Enterprise plugin preset can load the plugin from the new source:
+
+```text
+host: https://app.replicated.rajistics.com
+payload: automations/rajistics-postrename-smoke.json
+automation_id: bce0b844-2d12-4f61-b8eb-377f608a05e3
+name: OpenWiki Post-Rename Smoke
+enabled_after_dispatch: false
+```
+
+Manual dispatch result:
+
+```text
+run_id: c78fa6a8-f411-454f-97e2-6678588922c2
+status: COMPLETED
+conversation_id: fdd4ac7c-e0e8-4946-a7c5-223a581f0791
+pull_request: https://github.com/rajshah4/openwiki-demo-target/pull/2
+```
+
+The PR changed only:
+
+```text
+AGENTS.md
+openwiki/.last-update.json
+openwiki/quickstart.md
+```
+
 ## First Production Candidate
 
 Use a low-risk repository with:

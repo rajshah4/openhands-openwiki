@@ -1,0 +1,23 @@
+{
+  "name": "OpenWiki Post-Rename Smoke",
+  "plugins": [
+    {
+      "source": "github:rajshah4/openhands-openwiki",
+      "repo_path": "plugins/openwiki-docs",
+      "ref": "main"
+    }
+  ],
+  "repos": [
+    {
+      "url": "https://github.com/rajshah4/openwiki-demo-target",
+      "ref": "main"
+    }
+  ],
+  "prompt": "Use the OpenWiki Docs plugin loaded from github:rajshah4/openhands-openwiki on the cloned rajshah4/openwiki-demo-target repository. Run /openwiki-docs:init if openwiki/quickstart.md is missing; otherwise run /openwiki-docs:update. If OpenWiki documentation changed, create a branch named openwiki/postrename-smoke, commit only openwiki/** plus top-level AGENTS.md or CLAUDE.md changes, and open a pull request titled \"docs: OpenWiki post-rename smoke test\". If no docs changes are needed, do not create a commit or PR. Finish with a concise summary of changed docs, evidence inspected, caveats, and PR status.",
+  "trigger": {
+    "type": "cron",
+    "schedule": "0 8 * * *",
+    "timezone": "America/Chicago"
+  },
+  "timeout": 1200
+}

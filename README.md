@@ -94,6 +94,7 @@ The command files are intentionally thin. The durable behavior lives in [`plugin
 - [`automations/github-label-update.json`](automations/github-label-update.json): run when a PR gets the `openwiki-update` label.
 - [`automations/github-comment.json`](automations/github-comment.json): run when someone comments with `@openhands openwiki`.
 - [`automations/rajistics-demo-target-smoke.json`](automations/rajistics-demo-target-smoke.json): recorded smoke automation for `rajshah4/openwiki-demo-target`.
+- [`automations/rajistics-postrename-smoke.json`](automations/rajistics-postrename-smoke.json): recorded post-rename smoke using `github:rajshah4/openhands-openwiki`.
 
 Before deploying, replace placeholder repos and review the plugin source/ref.
 

@@ -138,9 +138,22 @@ Every automation prompt should keep these constraints:
 
 Treat any broader diff as a bug in the prompt or skill instructions.
 
-## Verified Smoke
+## Verified Smokes
 
-The Rajistics Enterprise instance has already run a tiny smoke automation against `rajshah4/openwiki-demo-target`:
+The Rajistics Enterprise instance has run smoke automations against `rajshah4/openwiki-demo-target`.
+
+Post-rename smoke using `github:rajshah4/openhands-openwiki`:
+
+```text
+automation_id: bce0b844-2d12-4f61-b8eb-377f608a05e3
+run_id: c78fa6a8-f411-454f-97e2-6678588922c2
+status: COMPLETED
+conversation_id: fdd4ac7c-e0e8-4946-a7c5-223a581f0791
+pull_request: https://github.com/rajshah4/openwiki-demo-target/pull/2
+enabled_after_dispatch: false
+```
+
+Original smoke:
 
 ```text
 automation_id: 9c875420-0b02-4dad-abe7-4dd0da725986
@@ -149,7 +162,7 @@ conversation_id: 545ac5d2-c5d3-4660-8fde-81afc9031fec
 pull_request: https://github.com/rajshah4/openwiki-demo-target/pull/1
 ```
 
-That run completed and changed only:
+Both runs completed and changed only:
 
 ```text
 AGENTS.md
