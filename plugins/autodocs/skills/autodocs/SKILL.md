@@ -55,8 +55,12 @@ Autodocs can use multiple context sources:
 - existing agent instructions such as `AGENTS.md`, `CLAUDE.md`, and nested skills
 - optional GitNexus graph context when available
 - optional generated GitNexus wiki output when the user explicitly asks to use or compare it
+- optional MCP servers, OpenHands tools, plugins, or custom integrations that provide relevant project evidence
+- optional structured project artifacts such as OpenAPI specs, database schemas, ADRs, runbooks, issue specs, CI reports, coverage reports, eval outputs, and service maps
 
 When GitNexus is not available, continue with standard repository inspection.
+
+When another integration is available, use it only when it directly improves the documentation task. Summarize the useful evidence and keep claims grounded in inspectable output.
 
 ## Optional GitNexus Rules
 

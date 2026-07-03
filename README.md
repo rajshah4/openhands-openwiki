@@ -38,8 +38,7 @@ GitNexus is optional. Autodocs should still produce useful documentation when Gi
 ## Repository Layout
 
 ```text
-benchmarks/                 # Recorded sample run and quality notes
-demo-target/                # Tiny local smoke-test repository
+benchmarks/                 # Recorded runs, context studies, and quality notes
 plugins/autodocs/           # The OpenHands plugin, commands, and skill
 ```
 
@@ -125,6 +124,27 @@ mcp
 
 Autodocs should treat GitNexus output as evidence, not as the only source of truth. Source files, existing docs, tests, config, and git history still matter.
 
+## Extend With More Context
+
+Autodocs is meant to be extended with the context sources your team already
+uses. OpenHands can inspect local files and git history by default, and it can
+also use tools, plugins, MCP servers, and custom integrations to bring in more
+evidence before writing docs.
+
+Good extension sources include:
+
+- GitNexus or other code intelligence tools
+- OpenAPI specs, GraphQL schemas, protobuf files, and SDK docs
+- database schemas, migrations, and data dictionaries
+- ADRs, runbooks, incident notes, and architecture docs
+- issue trackers, project specs, release notes, and customer-facing docs
+- CI results, test reports, coverage reports, and eval outputs
+- observability exports such as service maps or dependency inventories
+
+The important rule is the same for every integration: treat external context as
+evidence, summarize what matters, and keep the generated docs grounded in
+verifiable repository or tool output.
+
 ## Automation
 
 Once the manual flow works, use the automation server in Agent Canvas, remote Agent Canvas, OpenHands Cloud, or OpenHands Enterprise. Cron automations are the simplest first step because they can be manually dispatched and work well for validation. See the [automation docs](https://docs.openhands.dev/openhands/usage/agent-canvas/prebuilt-automations) for more details.
@@ -145,8 +165,12 @@ The automation server also supports events. For example, when your OpenHands sur
 
 The durable behavior lives in [`plugins/autodocs/skills/autodocs/SKILL.md`](plugins/autodocs/skills/autodocs/SKILL.md). The plugin also includes thin command wrappers for OpenHands surfaces that expose plugin commands, but plain language prompts work too.
 
-## Benchmark
+## Benchmarks
 
 To give you a sense of the baseline workflow, I ran a quick benchmark against `OpenHands/OpenHands-CLI`, which generated six OpenWiki-style documentation pages plus metadata in 203 seconds. That run used my local `Minimax` LLM profile (`openhands/minimax-m2.7`), but Autodocs itself is not tied to that profile.
 
-See [the benchmark report](benchmarks/openhands-cli-local-minimax/README.md) for generated docs, resource usage, and quality notes.
+See the [benchmarks index](benchmarks/README.md) for all reports.
+
+The [OpenHands CLI benchmark](benchmarks/openhands-cli-local-minimax/README.md) includes generated docs, resource usage, and quality notes.
+
+For a larger structured-context example, see the [VS Code GitNexus benchmark](benchmarks/vscode-gitnexus/README.md). It records how GitNexus helped identify `CommandService.executeCommand`, summarize symbol context, and measure the blast radius of `localize` in a large TypeScript/Electron codebase.
