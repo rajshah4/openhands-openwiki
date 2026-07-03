@@ -36,7 +36,7 @@ The local Agent Canvas and Enterprise automation paths use the same OpenWiki loo
 
 1. Load the `openwiki-docs` plugin.
 2. Point OpenHands at a target repository.
-3. Run `/openwiki-docs:init` or `/openwiki-docs:update`.
+3. Ask OpenHands to initialize or update the OpenWiki docs.
 4. Keep the diff scoped to `openwiki/**`, `AGENTS.md`, and `CLAUDE.md`.
 
 Local Agent Canvas works great for this. It also works with the Enterprise version of OpenHands, which gives you easier integrations.
@@ -60,7 +60,7 @@ Let's start with Agent Canvas doing this as a dry run.
 5. Start a conversation with a prompt like:
 
 ```text
-Use the openwiki-docs plugin in this repository and run /openwiki-docs:init.
+Use the openwiki-docs plugin in this repository and initialize OpenWiki docs.
 Focus on architecture, setup, tests, and release process.
 
 Constraints:
@@ -77,8 +77,8 @@ Create an OpenHands automation for OpenWiki docs maintenance.
 Use the plugin preset with source github:rajshah4/openhands-openwiki,
 repo_path plugins/openwiki-docs, and ref main.
 Run against https://github.com/OWNER/REPO every weekday at 8 AM.
-Run /openwiki-docs:init if openwiki/quickstart.md is missing;
-otherwise run /openwiki-docs:update.
+Initialize OpenWiki docs if openwiki/quickstart.md is missing;
+otherwise update the existing OpenWiki docs.
 Commit only openwiki/** plus top-level AGENTS.md or CLAUDE.md changes,
 and open a PR only when docs changed.
 ```
@@ -89,17 +89,7 @@ The automation server also supports events. Simply ask it to generate an automat
 contains(pull_request.labels[].name, 'openwiki-update')
 ```
 
-## Plugin Commands
-
-Use these inside an OpenHands conversation with the plugin loaded:
-
-```text
-/openwiki-docs:init
-/openwiki-docs:update
-/openwiki-docs:update API and routing changes
-```
-
-The command files are intentionally thin. The durable behavior lives in [`plugins/openwiki-docs/skills/openwiki-docs/SKILL.md`](plugins/openwiki-docs/skills/openwiki-docs/SKILL.md).
+The durable behavior lives in [`plugins/openwiki-docs/skills/openwiki-docs/SKILL.md`](plugins/openwiki-docs/skills/openwiki-docs/SKILL.md). The plugin also includes thin command wrappers for OpenHands surfaces that expose plugin commands, but you can use plain language prompts like the examples above.
 
 ## Benchmark
 
