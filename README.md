@@ -2,7 +2,7 @@
 
 OpenHands OpenWiki is a lightweight OpenHands skill and automation recipe for creating durable repository documentation in `openwiki/`.
 
-It is inspired by the OpenWiki idea: give humans and future coding agents a reliable place to start, then keep that documentation fresh as the repo changes. OpenHands is a perfect complement, because OpenHands can handle repo access, LLM profile configuration, tool runtime, scheduling, and GitHub integration. All we need is to use skills with the OpenHands conversation and automation surfaces.
+It is inspired by [LangChain's OpenWiki](https://github.com/langchain-ai/openwiki): give humans and future coding agents a reliable place to start, then keep that documentation fresh as the repo changes. OpenHands is a perfect complement, because OpenHands can handle repo access, LLM profile configuration, tool runtime, scheduling, and GitHub integration. All we need is to use skills with the OpenHands conversation and automation surfaces.
 
 ## What It Does
 
