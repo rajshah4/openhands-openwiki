@@ -31,16 +31,16 @@ plugins/openwiki-docs/          # The OpenHands plugin and skill
 
 ## Run It With OpenHands
 
-[Agent Canvas](https://github.com/OpenHands/agent-canvas) and Enterprise use the same OpenWiki loop:
+[Agent Canvas](https://github.com/OpenHands/agent-canvas) can run OpenWiki against local, remote, or cloud backends. The loop is the same:
 
 1. Load the `openwiki-docs` plugin.
 2. Point OpenHands at a target repository.
 3. Ask OpenHands to initialize or update the OpenWiki docs.
 4. Keep the diff scoped to `openwiki/**`, `AGENTS.md`, and `CLAUDE.md`.
 
-Agent Canvas works great for local conversations and local automations. Enterprise uses the same automation model, with stronger shared integrations, managed credentials, GitHub event delivery, and team visibility.
+Local is great for quick dry runs. Remote and cloud backends use the same automation model, and are a better fit when you want shared integrations, managed credentials, GitHub event delivery, or team visibility.
 
-Use these plugin settings when creating an OpenWiki plugin automation in Agent Canvas or Enterprise:
+Use these plugin settings when creating an OpenWiki plugin automation against any backend:
 
 ```text
 source: github:rajshah4/openhands-openwiki
@@ -69,7 +69,7 @@ Constraints:
 - Verify generated file listing, relative links, and git status before finishing.
 ```
 
-Once this works, use the automation server in Agent Canvas or Enterprise. Cron automations are the simplest first step because they work locally and can be manually dispatched. Event automations are useful for GitHub workflows, but they need the deployment and integration setup to receive those events. See the [automation docs for more details](https://docs.openhands.dev/openhands/usage/agent-canvas/prebuilt-automations).
+Once this works, use the automation server on a local, remote, or cloud backend. Cron automations are the simplest first step because they work locally and can be manually dispatched. Event automations are useful for GitHub workflows, but they need the backend and integration setup to receive those events. See the [automation docs for more details](https://docs.openhands.dev/openhands/usage/agent-canvas/prebuilt-automations).
 
 ```text
 Create an OpenHands automation for OpenWiki docs maintenance.
@@ -82,7 +82,7 @@ Commit only openwiki/** plus top-level AGENTS.md or CLAUDE.md changes,
 and open a PR only when docs changed.
 ```
 
-The automation server also supports events. If your Agent Canvas or Enterprise deployment can receive GitHub events, ask it to generate an automation for a new PR or a labeled PR. For a PR label trigger, ask for a GitHub `pull_request.labeled` event with this filter.
+The automation server also supports events. If your backend can receive GitHub events, ask it to generate an automation for a new PR or a labeled PR. For a PR label trigger, ask for a GitHub `pull_request.labeled` event with this filter.
 
 ```text
 contains(pull_request.labels[].name, 'openwiki-update')
