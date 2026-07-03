@@ -27,7 +27,6 @@ The output is meant to help a new engineer or future agent answer:
 benchmarks/                     # Recorded benchmark runs and generated docs
 demo-target/                    # Tiny local smoke-test repository
 plugins/openwiki-docs/          # The OpenHands plugin and skill
-scripts/                        # Preflight, local launcher, and validation helpers
 TESTING_PLAN.md                 # Cross-backend test plan
 ```
 
@@ -52,36 +51,28 @@ ref: main
 
 ## Local Agent Canvas Dry Run
 
-Verify local Agent Canvas:
+Use local Agent Canvas when you want a quick interactive dry run before scheduling anything.
 
-```bash
-./scripts/check-agent-canvas-local.sh http://127.0.0.1:8000
+1. Open Agent Canvas at `http://127.0.0.1:8000`.
+2. Select the `Minimax` profile, which maps to `openhands/minimax-m2.7` in the verified test environment.
+3. Make the target repository available to the local runtime. On macOS, `/private/tmp/my-target-repo` is usually easier than a repo under `~/Documents`.
+4. Load this repo's `openwiki-docs` plugin from `plugins/openwiki-docs`.
+5. Start a conversation with a prompt like:
+
+```text
+Use the openwiki-docs plugin in this repository and run /openwiki-docs:init.
+Focus on architecture, setup, tests, and release process.
+
+Constraints:
+- Write documentation under openwiki/.
+- Update only top-level AGENTS.md or CLAUDE.md outside openwiki/ if needed.
+- Do not edit application source files.
+- Verify generated file listing, relative links, and git status before finishing.
 ```
-
-Run OpenWiki against a local clone using the verified `Minimax` profile:
-
-```bash
-OPENWIKI_WORKSPACE=/private/tmp/my-target-repo \
-OPENWIKI_PROFILE=Minimax \
-OPENWIKI_MODE=init \
-OPENWIKI_FOCUS="architecture, setup, tests, and release process" \
-OPENWIKI_MAX_ITERATIONS=140 \
-node scripts/run-agent-canvas-openwiki.mjs
-```
-
-The verified local profile maps to `openhands/minimax-m2.7`. If the local server cannot read a repo under `~/Documents` on macOS, clone or copy the target repo under `/private/tmp`.
 
 ## Enterprise Automation
 
-Verify the automation API:
-
-```bash
-OPENHANDS_HOST="https://app.replicated.rajistics.com" \
-DOTENV_FILE="/path/to/.env" \
-./scripts/check-replicated-automation-api.sh
-```
-
-Then ask the OpenHands automation skill to create the automation. Start with cron for the first production path because it works well for manual dispatch, private deployments, and one-or-many repo maintenance:
+Ask the OpenHands automation skill to create the automation. Start with cron for the first production path because it works well for manual dispatch, private deployments, and one-or-many repo maintenance:
 
 ```text
 Create an OpenHands Enterprise automation for OpenWiki docs maintenance.
@@ -139,13 +130,6 @@ A local Agent Canvas benchmark against `OpenHands/OpenHands-CLI` generated six d
 See [the benchmark report](benchmarks/openhands-cli-local-minimax/README.md) for generated docs, resource usage, and quality notes.
 
 The headline finding: the docs were useful and scoped correctly, but init mode used 1.54M prompt tokens on a 388-file repository. That is the next optimization target before broad customer rollout.
-
-## Validate This Repo
-
-```bash
-./scripts/validate.sh
-node --check scripts/run-agent-canvas-openwiki.mjs
-```
 
 ## Status
 

@@ -18,9 +18,7 @@ version: 1.29.3
 sdk_version: 1.29.3
 ```
 
-Use `127.0.0.1` for scripted checks. On this machine, `localhost` may resolve through an interface that does not answer even when the service is listening.
-
-For API-driven local runs on this machine, `~/.openhands/agent-canvas/api-key.txt` is the active local API key. `session-api-key.txt` may be stale.
+Use `127.0.0.1` for local checks. On this machine, `localhost` may resolve through an interface that does not answer even when the service is listening.
 
 The local `Minimax` profile maps to:
 
@@ -109,30 +107,13 @@ A run passes only if all of these are true:
 
 ## Local Agent Canvas Tests
 
-Run preflight:
-
-```bash
-./scripts/check-agent-canvas-local.sh http://127.0.0.1:8000
-```
-
-This script treats `server_info` and `openapi` as required. Authenticated plugin/skill probes are best effort because a local session key can be missing or stale.
-
-Then install or load the local plugin through Agent Canvas. Use this repository path as the plugin source:
+Confirm Agent Canvas is reachable at `http://127.0.0.1:8000`, then install or load the local plugin through Agent Canvas. Use this repository path as the plugin source:
 
 ```text
 plugins/openwiki-docs
 ```
 
-For direct API testing with the local `Minimax` profile, use:
-
-```bash
-OPENWIKI_WORKSPACE=/private/tmp/my-openwiki-test-repo \
-OPENWIKI_PROFILE=Minimax \
-OPENWIKI_MODE=init \
-node scripts/run-agent-canvas-openwiki.mjs
-```
-
-This script reads the encrypted local profile through Agent Canvas, injects the `openwiki-docs` skill into `agent_context.skills`, and creates a conversation with the standard local tool set. It does not print API keys.
+Use the local `Minimax` profile for comparable test runs.
 
 ### LC-1: Demo Init
 
@@ -208,15 +189,7 @@ Expected:
 
 ## Replicated Automation Tests
 
-Run preflight after setting credentials:
-
-```bash
-export OPENHANDS_HOST="https://app.replicated.rajistics.com"
-export DOTENV_FILE="/Users/rajiv.shah/Code/install_replicate/.env"
-./scripts/check-replicated-automation-api.sh
-```
-
-Do not `source` the Rajistics `.env` directly. The helper parses assignment lines and supports either `OPENHANDS_API_KEY` or `OPENHANDS_API_KEY_ORG`.
+Ask the OpenHands automation skill to verify the automation backend and GitHub integration before creating runs. For Rajistics testing, the target host is `https://app.replicated.rajistics.com`; keep credentials in the local environment or configured instance secrets, not in prompts or docs.
 
 ### RA-1: Manual Cron Smoke On A Fork
 
