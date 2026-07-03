@@ -2,7 +2,7 @@
 
 OpenHands Autodocs is an OpenHands plugin and skill workflow for creating and maintaining durable repository documentation.
 
-It is inspired by [LangChain's OpenWiki](https://github.com/langchain-ai/openwiki): give humans and future coding agents a reliable place to start, then keep that documentation fresh as the repo changes. Autodocs keeps that default OpenWiki-style output, but is designed to be flexible enough to use other documentation formats and structured context sources, including GitNexus.
+It is inspired by [LangChain's OpenWiki](https://github.com/langchain-ai/openwiki): give humans and future coding agents a reliable place to start, then keep that documentation fresh as the repo changes. Autodocs keeps that default OpenWiki-style output, but is designed to be flexible enough to use other documentation formats and structured context sources, including [GitNexus](https://github.com/abhigyanpatwari/GitNexus).
 
 OpenHands is a natural runtime for this workflow because it already handles repository access, LLM profile configuration, tool runtime, scheduling, GitHub integration, and PR creation.
 
@@ -96,7 +96,7 @@ Constraints:
 
 ## Optional GitNexus Enrichment
 
-Autodocs can work without GitNexus. When GitNexus is installed and the repository has been indexed, it can improve the documentation workflow by giving OpenHands structured context:
+Autodocs can work without [GitNexus](https://github.com/abhigyanpatwari/GitNexus). When GitNexus is installed and the repository has been indexed, it can improve the documentation workflow by giving OpenHands structured context:
 
 - `query` to find the best starting points for a concept or workflow.
 - `context` to explain a symbol's callers, callees, interface relationships, and process membership.
@@ -133,7 +133,7 @@ evidence before writing docs.
 
 Good extension sources include:
 
-- GitNexus or other code intelligence tools
+- [GitNexus](https://github.com/abhigyanpatwari/GitNexus) or other code intelligence tools
 - OpenAPI specs, GraphQL schemas, protobuf files, and SDK docs
 - database schemas, migrations, and data dictionaries
 - ADRs, runbooks, incident notes, and architecture docs
