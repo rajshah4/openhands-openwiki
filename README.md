@@ -2,7 +2,7 @@
 
 OpenHands OpenWiki is a lightweight OpenHands skill and automation recipe for creating durable repository documentation in `openwiki/`.
 
-It is inspired by the OpenWiki idea: give humans and future coding agents a reliable place to start, then keep that documentation fresh as the repo changes. OpenHands is a perfect complement, because OpenHands can handle the scheduling, repo cloning, LLM profile configuration, tool runtime, and GitHub integration. All we need is to use skills with the automation server.
+It is inspired by the OpenWiki idea: give humans and future coding agents a reliable place to start, then keep that documentation fresh as the repo changes. OpenHands is a perfect complement, because OpenHands can handle repo access, LLM profile configuration, tool runtime, scheduling, and GitHub integration. All we need is to use skills with the OpenHands conversation and automation surfaces.
 
 ## What It Does
 
@@ -27,21 +27,20 @@ The output is meant to help a new engineer or future agent answer:
 benchmarks/                     # Recorded a sample run to show you what it does
 demo-target/                    # Tiny local smoke-test repository
 plugins/openwiki-docs/          # The OpenHands plugin and skill
-TESTING_PLAN.md                 # Cross-backend test plan
 ```
 
 ## Run It With OpenHands
 
-The local Agent Canvas and Enterprise automation paths use the same OpenWiki loop:
+Agent Canvas and Enterprise use the same OpenWiki loop:
 
 1. Load the `openwiki-docs` plugin.
 2. Point OpenHands at a target repository.
 3. Ask OpenHands to initialize or update the OpenWiki docs.
 4. Keep the diff scoped to `openwiki/**`, `AGENTS.md`, and `CLAUDE.md`.
 
-Local Agent Canvas works great for this. It also works with the Enterprise version of OpenHands, which gives you easier integrations.
+Agent Canvas works great for local conversations and local automations. Enterprise uses the same automation model, with stronger shared integrations, managed credentials, GitHub event delivery, and team visibility.
 
-Use these plugin settings in Enterprise automations:
+Use these plugin settings when creating an OpenWiki plugin automation in Agent Canvas or Enterprise:
 
 ```text
 source: github:rajshah4/openhands-openwiki
@@ -70,7 +69,7 @@ Constraints:
 - Verify generated file listing, relative links, and git status before finishing.
 ```
 
-Once this works, go ahead and use the cron or event-based automation path, for example to run after a PR. See the [automation docs for more details](https://docs.openhands.dev/openhands/usage/agent-canvas/prebuilt-automations).
+Once this works, use the automation server in Agent Canvas or Enterprise. Cron automations are the simplest first step because they work locally and can be manually dispatched. Event automations are useful for GitHub workflows, but they need the deployment and integration setup to receive those events. See the [automation docs for more details](https://docs.openhands.dev/openhands/usage/agent-canvas/prebuilt-automations).
 
 ```text
 Create an OpenHands automation for OpenWiki docs maintenance.
@@ -83,7 +82,7 @@ Commit only openwiki/** plus top-level AGENTS.md or CLAUDE.md changes,
 and open a PR only when docs changed.
 ```
 
-The automation server also supports events. Simply ask it to generate an automation for a new PR or a labeled PR. For a PR label trigger, ask for a GitHub `pull_request.labeled` event with this filter.
+The automation server also supports events. If your Agent Canvas or Enterprise deployment can receive GitHub events, ask it to generate an automation for a new PR or a labeled PR. For a PR label trigger, ask for a GitHub `pull_request.labeled` event with this filter.
 
 ```text
 contains(pull_request.labels[].name, 'openwiki-update')
