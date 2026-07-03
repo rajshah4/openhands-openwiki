@@ -31,7 +31,7 @@ plugins/openwiki-docs/          # The OpenHands plugin and skill
 
 ## Run It With OpenHands
 
-Agent Canvas and Enterprise use the same OpenWiki loop:
+[Agent Canvas](https://github.com/OpenHands/agent-canvas) and Enterprise use the same OpenWiki loop:
 
 1. Load the `openwiki-docs` plugin.
 2. Point OpenHands at a target repository.
