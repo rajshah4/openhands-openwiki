@@ -64,7 +64,7 @@ When another integration is available, use it only when it directly improves the
 
 ## Optional GitNexus Rules
 
-Use GitNexus only when it is available through MCP or CLI and the target repository has an index. Do not fail the Autodocs run just because GitNexus is missing, unreachable, or degraded. If MCP tools are unavailable but the GitNexus CLI works, note the MCP limitation and use the CLI as optional evidence.
+Use GitNexus only when it is available through MCP or CLI and the target repository has an index. GitNexus MCP enrichment requires OpenHands Agent Server `1.31.0` or newer; older `1.29.x` Agent Server / SDK builds can fail on MCP tool schemas with a valid argument named `kind`. Do not fail the Autodocs run just because GitNexus is missing, unreachable, or degraded. If MCP tools are unavailable but the GitNexus CLI works, note the MCP limitation or required Agent Server upgrade and use the CLI as optional evidence.
 
 High-value GitNexus uses:
 

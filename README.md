@@ -124,7 +124,11 @@ mcp
 
 Autodocs should treat GitNexus output as evidence, not as the only source of truth. Source files, existing docs, tests, config, and git history still matter.
 
-If enabling a GitNexus MCP server makes a conversation fail before the prompt runs, treat that as an OpenHands/MCP environment compatibility issue, not an Autodocs requirement. Disable the MCP server or update OpenHands/Agent Server, then run Autodocs normally. Autodocs can still work from standard repository inspection, and GitNexus CLI output can be used as optional evidence when available.
+GitNexus MCP enrichment requires OpenHands Agent Server `1.31.0` or newer. Older `1.29.x` Agent Server / SDK builds can fail while loading MCP tools whose schemas include a valid argument named `kind`. If you are running Agent Canvas locally before its default Agent Server pin has been updated, start it with:
+
+```bash
+OH_AGENT_SERVER_VERSION=1.31.0 npm run dev
+```
 
 ## Extend With More Context
 
