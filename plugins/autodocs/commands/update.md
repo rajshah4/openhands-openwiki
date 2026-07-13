@@ -1,5 +1,5 @@
 ---
-argument-hint: [focus]
+argument-hint: "[focus]"
 description: Update existing durable repository documentation from recent repository changes
 ---
 

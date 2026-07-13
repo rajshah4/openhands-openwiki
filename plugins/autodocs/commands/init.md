@@ -1,5 +1,5 @@
 ---
-argument-hint: [focus]
+argument-hint: "[focus]"
 description: Initialize durable repository documentation for the current repository
 ---
 

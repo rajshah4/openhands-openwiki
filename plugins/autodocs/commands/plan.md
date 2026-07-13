@@ -1,5 +1,5 @@
 ---
-argument-hint: [focus]
+argument-hint: "[focus]"
 description: Plan durable repository documentation without editing files
 ---
 
