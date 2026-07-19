@@ -16,7 +16,7 @@ triggers:
 
 You are maintaining durable repository documentation that is useful to both humans and future coding agents.
 
-The default output format is OpenWiki-style documentation under `openwiki/`. The required default entrypoint is `openwiki/quickstart.md`.
+The default output format is OpenWiki-style, OKF-compatible documentation under `openwiki/`. The required default entrypoint is `openwiki/quickstart.md`.
 
 Autodocs is flexible: when a user asks for another documentation format or an existing tool produces useful docs, use that format if it fits the request. GitNexus is an optional structured context provider, not a requirement.
 
@@ -31,6 +31,47 @@ Autodocs is flexible: when a user asks for another documentation format or an ex
 - Prefer concise, navigable docs over exhaustive file inventories.
 - Write for future change work: where to start, what to watch, and how to verify changes.
 
+## OpenWiki And OKF Compatibility
+
+For default OpenWiki-style output, follow the Open Knowledge Format (OKF) v0.1 conventions used by OpenWiki 0.2.
+
+Treat every non-reserved Markdown file under `openwiki/` as a concept document. Each concept document created or updated by Autodocs must begin with valid YAML front matter. Use this shape, replacing the example values with real values and omitting optional fields that do not apply:
+
+```yaml
+---
+type: Reference
+title: Optional display title
+description: One to two sentence summary optimized for search and retrieval.
+resource: Optional canonical URI or repository path
+tags: [optional, short, strings]
+timestamp: "<ISO 8601 datetime for last meaningful content change>"
+---
+```
+
+Only `type` is required. Recommended fields, in priority order, are `title`, `description`, `resource`, `tags`, and `timestamp`. Use short, descriptive `type` values such as `Architecture`, `Workflow`, `API Endpoint`, `Runbook`, `Testing Guide`, or `Reference`; do not force every page into a fixed taxonomy. Set `timestamp` from the runtime clock only when it represents the page's last meaningful content change. Preserve producer-defined front matter fields when updating existing concept documents. Omit optional fields when they are not supported by evidence.
+
+Reserved OKF files are not concept documents:
+
+- `index.md`
+- `log.md`
+- `INSTRUCTIONS.md`
+
+Do not add concept front matter to reserved files. The root `openwiki/index.md` may include only:
+
+```yaml
+---
+okf_version: "0.1"
+---
+```
+
+Maintain directory indexes for navigation. Each `index.md` should summarize sibling concept pages and subdirectories, using each page's `title` and `description` when present. Nested directory indexes should not include front matter.
+
+Maintain `openwiki/log.md` as the human- and agent-readable update log. Add an entry only when docs changed. Include the date, changed docs, and why they changed. Keep `openwiki/.last-update.json` as the machine-readable update marker.
+
+Use standard Markdown links between concept documents to express relationships. Put the link in the sentence that explains the relationship, such as "the API layer dispatches to [workflow execution](workflows/execution.md)." Quickstart links and index links help navigation but do not replace relationship links inside concept prose.
+
+When updating a legacy `openwiki/` tree that lacks OKF front matter, add or correct front matter only for pages edited in the run unless the user explicitly asks for a full OKF migration.
+
 ## Modes
 
 Use plan mode when the user asks what docs should be created, wants a dry run, or wants to compare documentation approaches.
@@ -43,6 +84,8 @@ If the user or automation command does not specify a mode:
 
 - choose init mode when `openwiki/quickstart.md` is missing
 - choose update mode when `openwiki/quickstart.md` exists
+
+If the user or automation command does not specify a documentation focus, use a default brief that covers architecture, setup, primary workflows, integrations, operations, tests, verification, and change-risk areas. Do not pause for clarification unless the repository purpose cannot be inferred from inspectable evidence.
 
 ## Context Sources
 
@@ -115,6 +158,7 @@ Return:
 - proposed docs pages
 - evidence to inspect
 - whether GitNexus appears available and useful
+- OKF readiness, including whether existing docs need front matter, index, or log updates
 - risks, unknowns, and suggested next command
 
 Prefer a short plan over a full design document. The plan should make it easy for a human to approve init or update mode.
@@ -128,6 +172,9 @@ Required behavior:
 - Create `openwiki/quickstart.md` first unless the user explicitly requested a different output format.
 - Create the smallest useful set of supporting pages needed to explain the repo.
 - Use at most 8 documentation pages unless the repo clearly needs more.
+- Add OKF front matter to every concept page created under `openwiki/`.
+- Create `openwiki/index.md` and any needed nested `index.md` files after creating concept pages.
+- Create `openwiki/log.md` with an initialization entry when docs are created.
 - Include a high-level repository overview in `quickstart.md`.
 - Link from `quickstart.md` to every major supporting page.
 - Do not link from `quickstart.md` to a supporting page unless that page exists by the end of the same run.
@@ -148,6 +195,7 @@ Required behavior:
 
 - Read existing `openwiki/` docs before editing.
 - Read `openwiki/.last-update.json` if present.
+- Read `openwiki/log.md` and relevant `index.md` files when present.
 - Build a docs impact plan in your own working notes:
   - source change
   - docs affected
@@ -155,6 +203,8 @@ Required behavior:
   - why
 - If GitNexus is available, consider `detect-changes` to map diffs to indexed symbols and affected flows.
 - Only edit pages whose current content is inaccurate, incomplete, or misleading because of recent source, workflow, product, or existing-doc changes.
+- Add or correct OKF front matter for any concept page you edit.
+- Refresh affected `index.md` files and append `openwiki/log.md` only when docs content changed.
 - Prefer replacing one stale sentence over rewriting an accurate page.
 - Do not make formatting-only edits.
 - Do not refresh source maps, git evidence lists, or generic watch-outs unless materially wrong.

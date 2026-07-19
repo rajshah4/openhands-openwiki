@@ -17,6 +17,7 @@ Optional focus: **$ARGUMENTS**
 4. Check whether GitNexus appears available and useful for this repository. Do not require GitNexus.
 5. Do not create, edit, move, or delete files.
 6. Return a recommended documentation plan and the evidence that should be inspected before writing docs.
+7. Include OKF readiness: expected concept pages, needed `index.md` files, whether `openwiki/log.md` exists or should be created, and any legacy pages that would need front matter during init or update.
 
 ## Output
 
@@ -26,5 +27,6 @@ Return:
 - proposed docs pages
 - context sources to use
 - GitNexus availability and likely value
+- OKF readiness
 - risks or unknowns
 - suggested next prompt or command
